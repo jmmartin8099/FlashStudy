@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jmmar.flashstudy.ChooseSetFragment"
+    android:background="@color/colorLightBrown"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/title_theme"
+        android:text="Select a Set to Study"/>
+
+    <ListView
+        android:id="@+id/list_view_setnames"
+        style="@style/default_list_view" />
+
+</LinearLayout>

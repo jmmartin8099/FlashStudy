@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBrown"
+    tools:context="com.example.jmmar.flashstudy.StudyFragment">
+
+    <TextView
+        android:id="@+id/display_set_name"
+        style="@style/text_setname"
+        android:text="Default Set Name" />
+
+    <Button
+        android:id="@+id/button_flash_card"
+        android:text="default text"
+        style="@style/button_index_card" />
+
+    <Button
+        android:id="@+id/button_previous"
+        style="@style/button_change_card"
+        android:text="@string/previous_text"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:id="@+id/button_next"
+        style="@style/button_change_card"
+        android:text="@string/next_text"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
