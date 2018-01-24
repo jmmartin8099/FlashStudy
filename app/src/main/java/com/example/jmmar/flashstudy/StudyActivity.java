@@ -1,22 +1,14 @@
 package com.example.jmmar.flashstudy;
 
-
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class StudyFragment extends Fragment {
+public class StudyActivity extends AppCompatActivity {
     private static DBHelper db;
 
     private ArrayList<IndexCard> mCards;
@@ -30,25 +22,20 @@ public class StudyFragment extends Fragment {
     private Button mPrevCard;
     private TextView mSetNameDisplay;
 
-    public StudyFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_study, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_study);
 
         db = MainActivity.getDB();
         mCards = ChooseSetFragment.getSetOfCards();
         mCurrPos = 0;
         mSize = mCards.size();
 
-        mCardDisplay = (Button) v.findViewById(R.id.button_flash_card);
-        mNextCard = (Button) v.findViewById(R.id.button_next);
-        mPrevCard = (Button) v.findViewById(R.id.button_previous);
-        mSetNameDisplay = (TextView) v.findViewById(R.id.display_set_name);
+        mCardDisplay = (Button) findViewById(R.id.button_flash_card);
+        mNextCard = (Button) findViewById(R.id.button_next);
+        mPrevCard = (Button) findViewById(R.id.button_previous);
+        mSetNameDisplay = (TextView) findViewById(R.id.display_set_name);
 
         // Display the first card
         mCurrCard = mCards.get(mCurrPos);
@@ -100,9 +87,5 @@ public class StudyFragment extends Fragment {
                 mShowsTerm = false;
             }
         });
-        return v;
     }
-
-
-
 }

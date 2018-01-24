@@ -1,6 +1,7 @@
 package com.example.jmmar.flashstudy;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,11 +21,15 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class ChooseSetFragment extends Fragment {
+    public static final String TAG = "ChooseSetFragment";
+    public static final String FRAG_SET_VIEW = "SetViewFragment";
+
     private ListView mSetsListView;
     private ArrayList<String> mSetNames;
     private String []mSets;
 
     private static ArrayList<IndexCard> mCards;
+    private static String mSetName;
 
     private DBHelper db;
     private static FragmentManager mFragmentManager;
@@ -85,10 +90,11 @@ public class ChooseSetFragment extends Fragment {
                     cursor.moveToNext();
                 }
 
-                // Launch StudyFragment
+                // Get Set Name
+                mSetName = mSets[position];
+
                 mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new StudyFragment(),MainActivity.FRAG_STUDY)
-                        .addToBackStack(MainActivity.FRAG_MAIN).commit();
+                        new SetViewFragment(),FRAG_SET_VIEW).commit();
             }
         });
         return v;
@@ -97,4 +103,9 @@ public class ChooseSetFragment extends Fragment {
     public static ArrayList<IndexCard> getSetOfCards(){
         return mCards;
     }
+
+    public static String getSetName(){
+        return mSetName;
+    }
+
 }

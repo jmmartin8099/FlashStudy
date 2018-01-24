@@ -13,15 +13,6 @@
 
     <TextView
         style="@style/default_text_theme"
-        android:text="Enter Set Name:" />
-
-    <EditText
-        style="@style/default_edit_text_theme"
-        android:id="@+id/edit_text_setname"
-        android:hint="Set Name" />
-
-    <TextView
-        style="@style/default_text_theme"
         android:text="Enter Term:" />
 
     <EditText

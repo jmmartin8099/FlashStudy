@@ -4,4 +4,6 @@
     <color name="colorDarkBrown">#432702</color>
     <color name="colorLightBrown">#875d32</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

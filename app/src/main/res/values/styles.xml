@@ -12,7 +12,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">20dp</item>
-        <item name="android:textSize">30dp</item>        <item name="android:textColor">@color/colorDarkBrown</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/colorDarkBrown</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
 
@@ -24,7 +25,7 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="text_setname">
         <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/colorDarkBrown</item>
@@ -60,7 +61,7 @@
         <item name="android:divider">@color/colorDarkBrown</item>
         <item name="android:dividerHeight">5dp</item>
     </style>
-    
+
     <style name="button_index_card">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -82,6 +83,18 @@
         <item name="android:textColor">@color/colorDarkBrown</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/colorLightBrown</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
     </style>
 
 </resources>

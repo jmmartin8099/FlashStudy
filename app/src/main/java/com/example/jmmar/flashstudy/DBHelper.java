@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "flashStudy.db";
     private static final int DB_VERSION = 1;
 
+    // Table for the flash cards
     public static final String CARDS_TABLE_NAME = "cards";
     public static final String CARDS_COLUMN_ID = "id";
     public static final String CARDS_COLUMN_SETNAME = "setname";
@@ -27,6 +28,17 @@ public class DBHelper extends SQLiteOpenHelper {
             + CARDS_COLUMN_TERM + " TEXT, " + CARDS_COLUMN_DEFINITION + " TEXT)";
 
     public static final String DELETE_CARDS = "DROP TABLE IF EXISTS " + CARDS_TABLE_NAME;
+
+    /* Table for the set names
+    public static final String SETS_TABLE_NAME = "sets";
+    public static final String SETS_COLUMN_ID = "id";
+    public static final String SETS_COLUMN_SET_NAME = "set_name";
+
+    public static final String CREATE_TABLE_SETS = "CREATE TABLE " + SETS_TABLE_NAME + "("
+            + SETS_COLUMN_ID + " INTEGER PRIMARY KEY, " + SETS_COLUMN_SET_NAME + " TEXT)";
+
+    public static final String DELETE_SETS = "DROP TABLE IF EXISTS " + SETS_TABLE_NAME;
+    */
 
     public DBHelper(Context context){
         super(context,DB_NAME,null,DB_VERSION);
@@ -75,7 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " FROM " + CARDS_TABLE_NAME,null);
     }
 
-    public Integer deleteSet(String setname){
+    public Integer deleteSetOfCards(String setname){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(CARDS_TABLE_NAME,CARDS_COLUMN_SETNAME + " = ?",new String[]{setname});
     }
