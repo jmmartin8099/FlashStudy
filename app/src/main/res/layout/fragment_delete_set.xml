@@ -12,7 +12,7 @@
         android:orientation="vertical">
     <TextView
         android:id="@+id/text_delete_set"
-        android:text="Enter the set name to delete all cards in the set:"
+        android:text="Enter the set name to delete all cards in the set: "
         android:textSize="40dp"
         style="@style/default_text_theme" />
 

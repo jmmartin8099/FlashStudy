@@ -41,10 +41,6 @@ public class IndexCard {
 
     @Override
     public String toString() {
-        return "IndexCard{" +
-                "setname='" + setname + '\'' +
-                ", term='" + term + '\'' +
-                ", def='" + def + '\'' +
-                '}';
+        return "Term: " + term + "\nDefiniton: " + def;
     }
 }

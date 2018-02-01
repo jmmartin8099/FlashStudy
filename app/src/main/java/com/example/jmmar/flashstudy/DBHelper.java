@@ -76,9 +76,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 + CARDS_COLUMN_SETNAME + " = '" + setname + "'",null);
     }
 
-    public Integer deleteCard(Integer id){
+    public int numCardsInSet(String setname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CARDS_TABLE_NAME + " WHERE "
+                + CARDS_COLUMN_SETNAME + " = '" + setname + "'",null);
+        return cursor.getCount();
+    }
+
+    public Integer deleteCard(String term){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(CARDS_TABLE_NAME,CARDS_COLUMN_ID + " = ?",new String[]{id.toString()});
+        return db.delete(CARDS_TABLE_NAME,CARDS_COLUMN_TERM + " = ?",new String[]{term.toString()});
     }
 
     public Cursor getSetnames(){

@@ -9,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.jmmar.flashstudy.R;
 
-import static com.example.jmmar.flashstudy.ChooseSetFragment.FRAG_SET_VIEW;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,7 @@ public class DeleteSetFragment extends Fragment {
     private DBHelper db;
     private FragmentManager mFragmentManager;
 
+    private TextView mDisplayMsg;
     private EditText mDeleteInput;
     private Button mCancel;
     private Button mDelete;
@@ -40,6 +42,9 @@ public class DeleteSetFragment extends Fragment {
 
         db = MainActivity.getDB();
         mFragmentManager = MainActivity.getFragManager();
+
+        mDisplayMsg = (TextView) v.findViewById(R.id.text_delete_set);
+        mDisplayMsg.append(ChooseSetFragment.getSetName());
 
         mDeleteInput = (EditText) v.findViewById(R.id.edit_text_delete_set);
         mCancel = (Button) v.findViewById(R.id.button_cancel_delete_set);
@@ -61,7 +66,7 @@ public class DeleteSetFragment extends Fragment {
                 String setName = mDeleteInput.getText().toString();
                 db.deleteSetOfCards(setName);
                 mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new MainFragment(),FRAG_MAIN).commit();
+                        new MainFragment(),FRAG_MAIN).addToBackStack(FRAG_MAIN).commit();
             }
         });
 

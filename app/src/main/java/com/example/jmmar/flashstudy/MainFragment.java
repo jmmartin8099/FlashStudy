@@ -4,13 +4,16 @@ package com.example.jmmar.flashstudy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_ADD_SET;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_ADD_SET_ID;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_CHOOSE_SET;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_CHOOSE_SET_ID;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
 
 
@@ -44,6 +47,7 @@ public class MainFragment extends Fragment {
         mChooseSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.setCurrFragDisplayed(FRAG_CHOOSE_SET_ID);
                 mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
                         new ChooseSetFragment(),FRAG_CHOOSE_SET).addToBackStack(FRAG_MAIN).commit();
             }
@@ -52,11 +56,46 @@ public class MainFragment extends Fragment {
         mAddSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.setCurrFragDisplayed(FRAG_ADD_SET_ID);
                 mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
                         new AddSetFragment(),FRAG_ADD_SET).addToBackStack(FRAG_MAIN).commit();
             }
         });
 
         return v;
+    }
+
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("MainFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("MainFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("MainFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("MainFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("MainFragment: onResume...");
     }
 }

@@ -16,13 +16,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW_ID;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ChooseSetFragment extends Fragment {
     public static final String TAG = "ChooseSetFragment";
-    public static final String FRAG_SET_VIEW = "SetViewFragment";
 
     private ListView mSetsListView;
     private ArrayList<String> mSetNames;
@@ -32,12 +34,11 @@ public class ChooseSetFragment extends Fragment {
     private static String mSetName;
 
     private DBHelper db;
-    private static FragmentManager mFragmentManager;
+    private static FragmentManager sFragmentManager;
 
     public ChooseSetFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +47,7 @@ public class ChooseSetFragment extends Fragment {
 
         // Retrieve set names from database
         db = MainActivity.getDB();
-        mFragmentManager = MainActivity.getFragManager();
+        sFragmentManager = MainActivity.getFragManager();
 
         Cursor cursor = db.getSetnames();
         mSetNames = new ArrayList<>();
@@ -75,33 +76,15 @@ public class ChooseSetFragment extends Fragment {
         mSetsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent,View view,int position,long id){
-                // Get cards with chosen set name
-                mCards = new ArrayList<IndexCard>();
-
-                Cursor cursor = db.getCards(mSets[position]);
-                int setIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_SETNAME),
-                        termIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_TERM),
-                        defIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_DEFINITION);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()){
-                    IndexCard temp = new IndexCard(cursor.getString(setIndex)
-                            ,cursor.getString(termIndex),cursor.getString(defIndex));
-                    mCards.add(temp);
-                    cursor.moveToNext();
-                }
-
                 // Get Set Name
                 mSetName = mSets[position];
 
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
+                MainActivity.setCurrFragDisplayed(FRAG_SET_VIEW_ID);
+                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
                         new SetViewFragment(),FRAG_SET_VIEW).commit();
             }
         });
         return v;
-    }
-
-    public static ArrayList<IndexCard> getSetOfCards(){
-        return mCards;
     }
 
     public static String getSetName(){
