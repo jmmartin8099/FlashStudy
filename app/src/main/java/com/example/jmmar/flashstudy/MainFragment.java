@@ -1,6 +1,7 @@
 package com.example.jmmar.flashstudy;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +25,6 @@ public class MainFragment extends Fragment {
     public static final String TAG = "MainFragment";
 
     private DBHelper db;
-    private FragmentManager mFragmentManager;
 
     private Button mChooseSet;
     private Button mAddSet;
@@ -39,7 +39,6 @@ public class MainFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         db = MainActivity.getDB();
-        mFragmentManager = MainActivity.getFragManager();
 
         mChooseSet = (Button) v.findViewById(R.id.button_choose_set);
         mAddSet = (Button) v.findViewById(R.id.button_add_set);
@@ -48,8 +47,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.setCurrFragDisplayed(FRAG_CHOOSE_SET_ID);
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new ChooseSetFragment(),FRAG_CHOOSE_SET).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new ChooseSetFragment(),FRAG_CHOOSE_SET,FRAG_MAIN);
             }
         });
 
@@ -57,8 +55,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.setCurrFragDisplayed(FRAG_ADD_SET_ID);
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new AddSetFragment(),FRAG_ADD_SET).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new AddSetFragment(),FRAG_ADD_SET,FRAG_MAIN);
             }
         });
 

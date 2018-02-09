@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,18 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_CARD;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_CARD_ID;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_SET;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EditSetFragment extends Fragment {
     public static final String TAG = "EditSetFragment";
-    public static final String FRAG_EDIT_CARD = "EditCardFragment";
 
-    private static DBHelper db;
-    private static FragmentManager mFragmentManager;
+    private DBHelper db;
 
     private ListView mCardsList;
     private ArrayList<IndexCard> mCardsArr;
@@ -43,23 +46,20 @@ public class EditSetFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_edit_set, container, false);
 
         db = MainActivity.getDB();
-        mFragmentManager = MainActivity.getFragManager();
 
-        mCardsArr = new ArrayList<>(db.numCardsInSet(ChooseSetFragment.getSetName()));
+        mCardsArr = new ArrayList<>();
 
         // Get cards from database
         Cursor cursor = db.getCards(ChooseSetFragment.getSetName());
-        int setIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_SETNAME),
-                termIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_TERM),
+        int termIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_TERM),
                 defIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_DEFINITION);
+
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            IndexCard temp = new IndexCard(cursor.getString(setIndex)
-                    ,cursor.getString(termIndex),cursor.getString(defIndex));
+            IndexCard temp = new IndexCard(cursor.getString(termIndex),cursor.getString(defIndex));
             mCardsArr.add(temp);
             cursor.moveToNext();
         }
-        mCardsArr.remove(0);
         mSize = mCardsArr.size();
         mCardsData = new String[mSize];
 
@@ -77,8 +77,8 @@ public class EditSetFragment extends Fragment {
                 //Get Card info
                 mCard = mCardsArr.get(position);
 
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new EditCardFragment(),FRAG_EDIT_CARD).commit();
+                MainActivity.setCurrFragDisplayed(FRAG_EDIT_CARD_ID);
+                MainActivity.launchFragment(new EditCardFragment(),FRAG_EDIT_CARD,FRAG_EDIT_SET);
             }
         });
 
@@ -88,4 +88,39 @@ public class EditSetFragment extends Fragment {
     public static IndexCard getChosenCard(){
         return mCard;
     }
+
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("EditSetFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("EditSetFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("EditSetFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("EditSetFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("EditSetFragment: onResume...");
+    }
+
 }

@@ -17,11 +17,15 @@ import org.w3c.dom.Text;
 
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_ADD_CARDS;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_ADD_CARDS_ID;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_CHOOSE_SET;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_CHOOSE_SET_ID;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_DELETE_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_DELETE_SET_ID;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_SET_ID;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW_ID;
 
 
 /**
@@ -30,10 +34,9 @@ import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
 public class SetViewFragment extends Fragment {
     public static final String TAG = "SetViewFragment";
 
-    private static DBHelper db;
-    private static FragmentManager sFragmentManager;
+    private DBHelper db;
 
-    private static String mSetName;
+    private String mSetName;
 
     private TextView mDisplaySetName;
     private Button mBeginStudy;
@@ -52,7 +55,6 @@ public class SetViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_set_view, container, false);
 
         db = MainActivity.getDB();
-        sFragmentManager = MainActivity.getFragManager();
 
         mDisplaySetName = (TextView) v.findViewById(R.id.view_set_title);
 
@@ -66,14 +68,25 @@ public class SetViewFragment extends Fragment {
         mEditSet = (Button) v.findViewById(R.id.button_edit_set);
         mDeleteSet = (Button) v.findViewById(R.id.button_delete_set);
 
+        // Set onClickListener to change sets
+        mDisplaySetName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.setCurrFragDisplayed(FRAG_CHOOSE_SET_ID);
+                MainActivity.launchFragment(new ChooseSetFragment(),FRAG_CHOOSE_SET,
+                        FRAG_SET_VIEW);
+            }
+        });
+
         // Set onClickListener to BeginStudying
         mBeginStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (db.numCardsInSet(mSetName) == 1)
+                if (db.numCardsInSet(mSetName) == 0)
                     Toast.makeText(v.getContext(),"No Cards in Set!\nAdd Cards to begin studying.",
                             Toast.LENGTH_LONG).show();
                 else {
+                    MainActivity.setCurrFragDisplayed(FRAG_SET_VIEW_ID);
                     Intent startIntent = new Intent(v.getContext(), StudyActivity.class);
                     startActivity(startIntent);
                 }
@@ -85,8 +98,7 @@ public class SetViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.setCurrFragDisplayed(FRAG_ADD_CARDS_ID);
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new AddCardsFragment(),FRAG_ADD_CARDS).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new AddCardsFragment(),FRAG_ADD_CARDS,FRAG_SET_VIEW);
             }
         });
 
@@ -94,13 +106,12 @@ public class SetViewFragment extends Fragment {
         mEditSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (db.numCardsInSet(mSetName) == 1)
+                if (db.numCardsInSet(mSetName) == 0)
                     Toast.makeText(v.getContext(),"No Cards in Set!\nAdd Cards to edit the set.",
                             Toast.LENGTH_LONG).show();
                 else {
                     MainActivity.setCurrFragDisplayed(FRAG_EDIT_SET_ID);
-                    sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                            new EditSetFragment(), FRAG_EDIT_SET).addToBackStack(FRAG_MAIN).commit();
+                    MainActivity.launchFragment(new EditSetFragment(), FRAG_EDIT_SET,FRAG_SET_VIEW);
                 }
             }
         });
@@ -110,8 +121,7 @@ public class SetViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.setCurrFragDisplayed(FRAG_DELETE_SET_ID);
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new DeleteSetFragment(),FRAG_DELETE_SET).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new DeleteSetFragment(),FRAG_DELETE_SET,FRAG_SET_VIEW);
             }
         });
 

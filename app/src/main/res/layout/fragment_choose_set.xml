@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jmmar.flashstudy.ChooseSetFragment"
-    android:background="@color/colorLightBrown"
+    android:background="@color/colorLightBlue"
     android:orientation="vertical">
 
     <TextView

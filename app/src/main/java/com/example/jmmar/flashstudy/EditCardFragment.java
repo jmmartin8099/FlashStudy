@@ -4,13 +4,16 @@ package com.example.jmmar.flashstudy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
 
@@ -21,8 +24,9 @@ import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
 public class EditCardFragment extends Fragment {
     public static final String TAG = "EditCardFragment";
 
-    private static DBHelper db;
-    private static FragmentManager mFragmentManager;
+    private DBHelper db;
+    private FragmentManager mFragmentManager;
+    private String mSetName;
 
     private TextView mCurrTerm;
     private TextView mCurrDef;
@@ -34,7 +38,7 @@ public class EditCardFragment extends Fragment {
     private Button mSave;
     private Button mDeleteCard;
 
-    private static IndexCard mCard;
+    private static IndexCard sCard;
 
     public EditCardFragment() {
         // Required empty public constructor
@@ -48,7 +52,8 @@ public class EditCardFragment extends Fragment {
 
         db = MainActivity.getDB();
         mFragmentManager = MainActivity.getFragManager();
-        mCard = EditSetFragment.getChosenCard();
+        mSetName = ChooseSetFragment.getSetName();
+        sCard = EditSetFragment.getChosenCard();
 
         mCurrTerm = (TextView) v.findViewById(R.id.text_display_old_term);
         mCurrDef = (TextView) v.findViewById(R.id.text_display_old_def);
@@ -61,8 +66,8 @@ public class EditCardFragment extends Fragment {
         mDeleteCard = (Button) v.findViewById(R.id.button_delete_card);
 
         // Display current card term and definition
-        mCurrTerm.setText("Current Term: " + mCard.getTerm());
-        mCurrDef.setText("Current Definition: " + mCard.getDef());
+        mCurrTerm.setText("Current Term: " + sCard.getTerm());
+        mCurrDef.setText("Current Definition: " + sCard.getDef());
 
         // Set onClickListener for CANCEL
         mCancel.setOnClickListener(new View.OnClickListener() {
@@ -79,21 +84,49 @@ public class EditCardFragment extends Fragment {
             public void onClick(View v) {
                 String newTerm = mTermInput.getText().toString(),
                         newDef = mDefInput.getText().toString();
+                msg("Old Card = " + sCard.toString());
+                msg("newTerm = " + newTerm + "\nnewDef = " + newDef);
+                IndexCard newCard = new IndexCard();
 
-                IndexCard newCard = new IndexCard(mCard.getSetname(),newTerm,newDef);
+                if (newTerm.equals("") && newDef.equals("")){
+                    // No changes made to card, launch SetViewFragment
+                    Toast.makeText(v.getContext(),"No Changes Made To Card.",Toast.LENGTH_SHORT)
+                            .show();
+                    MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
+                }
+                else if(newTerm.equals("") && !newDef.equals("")){
+                    // Term has not been changed, Definition has changed
+                    msg("In first else if");
+                    newCard.setTerm(sCard.getTerm());
+                    newCard.setDef(newDef);
+                    db.deleteCard(mSetName,sCard.getTerm());
+                    db.addCard(mSetName,newCard);
+                }
+                else if (!newTerm.equals("") && newDef.equals("")){
+                    // Term has been changed, Definition has not been changed
+                    msg("in second else if");
+                    newCard.setTerm(newTerm);
+                    newCard.setDef(sCard.getDef());
+                    db.deleteCard(mSetName,sCard.getTerm());
+                    db.addCard(mSetName,newCard);
+                }
+                else{
+                    // Both term and definition has been changed
+                    msg("in else");
+                    newCard.setTerm(newTerm);
+                    newCard.setDef(newDef);
+                    db.deleteCard(mSetName,sCard.getTerm());
+                    db.addCard(mSetName,newCard);
+                }
 
-                db.deleteCard(mCard.getTerm());
-                db.insertCard(newCard);
-
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
             }
         });
 
         mDeleteCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.deleteCard(mCard.getTerm());
+                db.deleteCard(mSetName,sCard.getTerm());
 
                 mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
                         new SetViewFragment(),FRAG_SET_VIEW).commit();
@@ -102,5 +135,40 @@ public class EditCardFragment extends Fragment {
 
         return v;
     }
+
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("EditCardFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("EditCardFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("EditCardFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("EditCardFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("EditCardFragment: onResume...");
+    }
+
 
 }

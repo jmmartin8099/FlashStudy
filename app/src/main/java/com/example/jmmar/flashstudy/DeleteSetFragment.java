@@ -4,12 +4,14 @@ package com.example.jmmar.flashstudy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jmmar.flashstudy.R;
 
@@ -64,13 +66,51 @@ public class DeleteSetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String setName = mDeleteInput.getText().toString();
-                db.deleteSetOfCards(setName);
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new MainFragment(),FRAG_MAIN).addToBackStack(FRAG_MAIN).commit();
+                if (setName.equals(""))
+                    Toast.makeText(v.getContext(),"Please Enter a Set Name.",Toast.LENGTH_SHORT).show();
+                else {
+                    db.deleteSet(setName);
+                    mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
+                            new MainFragment(), FRAG_MAIN).addToBackStack(FRAG_MAIN).commit();
+                }
             }
         });
 
         return v;
+    }
+
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("DeleteSetFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("DeleteSetFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("DeleteSetFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("DeleteSetFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("DeleteSetFragment: onResume...");
     }
 
 }

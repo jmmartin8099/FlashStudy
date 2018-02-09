@@ -18,12 +18,13 @@ import android.widget.Toast;
 public class AddCardsFragment extends Fragment {
     public static final String TAG = "AddCardsFragment";
 
-    private static DBHelper db;
+    private static DBHelper sDb;
 
-    private static String mSetname;
+    private static String sSetname;
     private EditText mTerm;
     private EditText mDefinition;
     private Button mEnterCard;
+    private Button mCancelCard;
 
     public AddCardsFragment() {
         // Required empty public constructor
@@ -35,26 +36,39 @@ public class AddCardsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_cards, container, false);
 
-        db = MainActivity.getDB();
+        sDb = MainActivity.getDB();
 
         mEnterCard = (Button) v.findViewById(R.id.button_enter_card);
+        mCancelCard = (Button) v.findViewById(R.id.button_cancel_add_card);
         mTerm = (EditText) v.findViewById(R.id.edit_text_term);
         mDefinition = (EditText) v.findViewById(R.id.edit_text_definition);
 
         mEnterCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSetname = ChooseSetFragment.getSetName();
-
-                IndexCard card = new IndexCard(mSetname,mTerm.getText().toString(),
-                        mDefinition.getText().toString());
-                db.insertCard(card);
-
-                Toast.makeText(v.getContext(),"Card Successfully Added!",Toast.LENGTH_LONG).show();
+                sSetname = ChooseSetFragment.getSetName();
+                if (mTerm.getText().toString().equals("") ||
+                        mDefinition.getText().toString().equals(""))
+                    Toast.makeText(v.getContext(),"Please Enter Both a Term and Definition.",
+                            Toast.LENGTH_SHORT).show();
+                else {
+                    IndexCard card = new IndexCard(mTerm.getText().toString(),
+                            mDefinition.getText().toString());
+                    sDb.addCard(sSetname, card);
+                    Toast.makeText(v.getContext(), "Card Successfully Added!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-
+        mCancelCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.setCurrFragDisplayed(MainActivity.FRAG_SET_VIEW_ID);
+                MainActivity.launchFragment(new SetViewFragment(),MainActivity.FRAG_SET_VIEW,
+                        MainActivity.FRAG_ADD_CARDS);
+            }
+        });
 
         return v;
     }

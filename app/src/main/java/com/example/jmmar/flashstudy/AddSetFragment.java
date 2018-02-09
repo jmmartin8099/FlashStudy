@@ -4,6 +4,7 @@ package com.example.jmmar.flashstudy;
 import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class AddSetFragment extends Fragment {
 
     private EditText mSetNameInput;
     private Button mEnterSet;
+    private Button mCancelSet;
 
     public AddSetFragment() {
         // Required empty public constructor
@@ -37,17 +39,63 @@ public class AddSetFragment extends Fragment {
 
         mSetNameInput = (EditText) v.findViewById(R.id.edit_text_set_name);
         mEnterSet = (Button) v.findViewById(R.id.button_enter_set_name);
+        mCancelSet = (Button) v.findViewById(R.id.button_cancel_set_name);
 
         mEnterSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IndexCard temp = new IndexCard(mSetNameInput.getText().toString(),"set","set");
-                db.insertCard(temp);
-                Toast.makeText(v.getContext(),"Set Successfully Added!",Toast.LENGTH_SHORT).show();
+                if (mSetNameInput.getText().toString().equals(""))
+                    Toast.makeText(v.getContext(), "Please Enter a Set Name.", Toast.LENGTH_SHORT).show();
+                else if (db.addSet(mSetNameInput.getText().toString()))
+                    Toast.makeText(v.getContext(),"Set Successfully Added!",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(v.getContext(),"Set Already Exists!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mCancelSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.setCurrFragDisplayed(MainActivity.FRAG_MAIN_ID);
+                MainActivity.launchFragment(new MainFragment(),MainActivity.FRAG_MAIN,
+                        MainActivity.FRAG_ADD_SET);
             }
         });
 
         return v;
     }
 
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("AddSetFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("AddSetFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("AddSetFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("AddSetFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("AddSetFragment: onResume...");
+    }
 }

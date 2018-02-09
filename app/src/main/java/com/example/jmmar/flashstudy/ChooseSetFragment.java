@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_CHOOSE_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW_ID;
 
@@ -30,8 +33,7 @@ public class ChooseSetFragment extends Fragment {
     private ArrayList<String> mSetNames;
     private String []mSets;
 
-    private static ArrayList<IndexCard> mCards;
-    private static String mSetName;
+    private static String sSetName;
 
     private DBHelper db;
     private static FragmentManager sFragmentManager;
@@ -49,12 +51,12 @@ public class ChooseSetFragment extends Fragment {
         db = MainActivity.getDB();
         sFragmentManager = MainActivity.getFragManager();
 
-        Cursor cursor = db.getSetnames();
+        Cursor cursor = db.getSets();
         mSetNames = new ArrayList<>();
 
         // Check if database is empty
         if (cursor != null){
-            int setnameIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_SETNAME);
+            int setnameIndex = cursor.getColumnIndex(DBHelper.SETS_COLUMN_SET_NAME);
             cursor.moveToFirst();
             while(!cursor.isAfterLast()){
                 mSetNames.add(cursor.getString(setnameIndex));
@@ -62,10 +64,13 @@ public class ChooseSetFragment extends Fragment {
             }
         }
 
+
         // Convert setNames into a String[]
         mSets = new String[mSetNames.size()];
         for (int i = 0;i<mSets.length;i++)
             mSets[i] = mSetNames.get(i);
+
+        Arrays.sort(mSets);
 
         // Set the ListView to display the setnames
         // TODO: Create a layout to adjust the text inside the ListView
@@ -77,18 +82,51 @@ public class ChooseSetFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent,View view,int position,long id){
                 // Get Set Name
-                mSetName = mSets[position];
+                sSetName = mSets[position];
 
                 MainActivity.setCurrFragDisplayed(FRAG_SET_VIEW_ID);
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).commit();
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_CHOOSE_SET);
             }
         });
         return v;
     }
 
     public static String getSetName(){
-        return mSetName;
+        return sSetName;
+    }
+
+    public void msg(String str){
+        Log.i(MainActivity.TAG,str);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        msg("ChooseSetFragment: onStart...");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        msg("ChooseSetFragment: onStop...");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        msg("ChooseSetFragment: onDestroy...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        msg("ChooseSetFragment: onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        msg("ChooseSetFragment: onResume...");
     }
 
 }

@@ -5,22 +5,17 @@ package com.example.jmmar.flashstudy;
  */
 
 public class IndexCard {
-    private String setname;
     private String term;
     private String def;
 
-    public IndexCard(String setname, String term, String def) {
-        this.setname = setname;
+    public IndexCard(){
+        term = null;
+        def = null;
+    }
+
+    public IndexCard(String term, String def) {
         this.term = term;
         this.def = def;
-    }
-
-    public String getSetname() {
-        return setname;
-    }
-
-    public void setSetname(String setname) {
-        this.setname = setname;
     }
 
     public String getTerm() {

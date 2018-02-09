@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class StudyActivity extends AppCompatActivity {
-    private static DBHelper db;
-    private static FragmentManager mFragmentManager;
+    private DBHelper db;
+    private FragmentManager mFragmentManager;
 
     private ArrayList<IndexCard> mCards;
     private IndexCard mCurrCard;
@@ -36,21 +36,14 @@ public class StudyActivity extends AppCompatActivity {
         mCards = new ArrayList<>();
 
         Cursor cursor = db.getCards(ChooseSetFragment.getSetName());
-        int setIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_SETNAME),
-                termIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_TERM),
+        int termIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_TERM),
                 defIndex = cursor.getColumnIndex(DBHelper.CARDS_COLUMN_DEFINITION);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            IndexCard temp = new IndexCard(cursor.getString(setIndex)
-                    ,cursor.getString(termIndex),cursor.getString(defIndex));
+            IndexCard temp = new IndexCard(cursor.getString(termIndex),cursor.getString(defIndex));
             mCards.add(temp);
             cursor.moveToNext();
         }
-
-        // Remove the first card from the set that holds the values,
-        // "Setname","set","set"
-        int firstCard = 0;
-        mCards.remove(firstCard);
 
         mCurrPos = 0;
         mSize = mCards.size();
@@ -63,7 +56,7 @@ public class StudyActivity extends AppCompatActivity {
         // Display the first card
         mCurrCard = mCards.get(mCurrPos);
         mCardDisplay.setText(mCurrCard.getDef());
-        mSetNameDisplay.setText(mCurrCard.getSetname());
+        mSetNameDisplay.setText(ChooseSetFragment.getSetName());
         mShowsTerm = false;
 
         // Set onClickListener to flip the card

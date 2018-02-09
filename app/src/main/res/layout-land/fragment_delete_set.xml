@@ -13,7 +13,7 @@
         android:id="@+id/text_delete_set"
         android:text="Enter the set name to delete all cards in the set: "
         android:textSize="40dp"
-        style="@style/default_text_theme" />
+        style="@style/default_text_theme_land" />
 
     <EditText
         android:id="@+id/edit_text_delete_set"
@@ -22,15 +22,25 @@
         android:layout_marginRight="5dp"
         style="@style/default_edit_text_theme" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
     <Button
         android:id="@+id/button_cancel_delete_set"
         android:text="cancel"
-        style="@style/default_button_theme" />
+        style="@style/default_button_theme_land"
+        android:layout_weight=".5"/>
 
     <Button
         android:id="@+id/button_final_delete_set"
         android:text="delete"
-        style="@style/default_button_theme" />
+        style="@style/default_button_theme_land"
+        android:layout_weight=".5"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>

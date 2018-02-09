@@ -1,6 +1,8 @@
 package com.example.jmmar.flashstudy;
 
+import android.database.Cursor;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int FRAG_EDIT_SET_ID = 5;
     public static final String FRAG_DELETE_SET = "DeleteSetFragment";
     public static final int FRAG_DELETE_SET_ID = 6;
+    public static final String FRAG_EDIT_CARD = "EditCardFragment";
+    public static final int FRAG_EDIT_CARD_ID = 7;
 
     private static int sCurrFragDisplayed;
 
@@ -71,38 +75,42 @@ public class MainActivity extends AppCompatActivity {
         switch (sCurrFragDisplayed){
 
             case FRAG_CHOOSE_SET_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new ChooseSetFragment(),FRAG_CHOOSE_SET).addToBackStack(FRAG_MAIN).commit();
+                launchFragment(new EditCardFragment(),FRAG_CHOOSE_SET,FRAG_MAIN);
                 break;
 
             case FRAG_ADD_SET_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new AddSetFragment(),FRAG_ADD_SET).addToBackStack(FRAG_MAIN).commit();
+                launchFragment(new AddSetFragment(),FRAG_ADD_SET,FRAG_MAIN);
                 break;
 
             case FRAG_SET_VIEW_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).commit();
+                launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_CHOOSE_SET);
                 break;
 
             case FRAG_ADD_CARDS_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new AddCardsFragment(),FRAG_ADD_CARDS).addToBackStack(FRAG_MAIN).commit();
+                launchFragment(new AddCardsFragment(),FRAG_ADD_CARDS,FRAG_SET_VIEW);
                 break;
 
             case FRAG_EDIT_SET_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new EditSetFragment(),FRAG_EDIT_SET).addToBackStack(FRAG_MAIN).commit();
+                launchFragment(new EditSetFragment(),FRAG_EDIT_SET,FRAG_SET_VIEW);
                 break;
 
             case FRAG_DELETE_SET_ID:
-                sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new DeleteSetFragment(),FRAG_DELETE_SET).addToBackStack(FRAG_MAIN).commit();
+                launchFragment(new DeleteSetFragment(),FRAG_DELETE_SET,FRAG_SET_VIEW);
                 break;
+
+            case FRAG_EDIT_CARD_ID:
+                launchFragment(new EditCardFragment(),FRAG_EDIT_CARD,FRAG_EDIT_SET);
+                break;
+
         }
     }
 
-    public void msg(String str){
+    public static void launchFragment(Fragment frag,String tag,String backStackTag){
+        sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
+                frag,tag).addToBackStack(backStackTag).commit();
+    }
+
+    public  void msg(String str){
         Log.i(TAG,str);
     }
 

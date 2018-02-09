@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.jmmar.flashstudy.MainActivity"
     android:id="@+id/rootView"
-    android:background="@color/colorLightBrown">
+    android:background="@color/colorLightBlue">
 
     <FrameLayout
         android:id="@+id/big_fragment_container"

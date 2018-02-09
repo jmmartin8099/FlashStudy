@@ -23,11 +23,11 @@
     <Button
         android:id="@+id/button_cancel_set_name"
         android:text="cancel"
-        style="@style/default_button_theme" />
+        style="@style/default_button_theme_land" />
 
     <Button
         android:id="@+id/button_enter_set_name"
         android:text="enter"
-        style="@style/default_button_theme" />
+        style="@style/default_button_theme_land" />
 
 </LinearLayout>
