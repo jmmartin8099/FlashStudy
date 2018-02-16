@@ -2,39 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightBlue"
+    android:background="@color/colorLightGray"
     tools:context="com.example.jmmar.flashstudy.StudyActivity">
+
+    <TextView
+        android:id="@+id/text_shuffle"
+        android:text="Shuffle"
+        android:textSize="25dp"
+        android:textColor="@color/colorDarkBlue"
+        android:fontFamily="cursive"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/display_set_name"
         style="@style/text_setname"
         android:text="Default Set Name" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum=".5">
+    <Button
+        android:id="@+id/button_flash_card"
+        android:text="default text"
+        style="@style/button_index_card" />
 
-        <Button
-            android:id="@+id/button_previous"
-            style="@style/button_change_card"
-            android:text="@string/previous_text"
-            android:layout_weight=".065"/>
-
-        <Button
-            android:id="@+id/button_flash_card"
-            android:text="default text"
-            android:layout_weight=".35"
-            style="@style/button_index_card" />
-
-        <Button
-            android:id="@+id/button_next"
-            style="@style/button_change_card"
-            android:text="@string/next_text"
-            android:layout_weight=".09" />
-
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/text_term_def"
+        android:text="Definition"
+        style="@style/text_setname"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

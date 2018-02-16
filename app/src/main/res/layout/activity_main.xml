@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.jmmar.flashstudy.MainActivity"
     android:id="@+id/rootView"
-    android:background="@color/colorLightBlue">
+    android:background="@color/colorLightGray">
 
     <FrameLayout
         android:id="@+id/big_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
- />
+        android:layout_height="match_parent" />
 
 
 </android.support.constraint.ConstraintLayout>

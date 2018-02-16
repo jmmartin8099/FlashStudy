@@ -1,6 +1,7 @@
 package com.example.jmmar.flashstudy;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -67,9 +69,16 @@ public class DeleteSetFragment extends Fragment {
             public void onClick(View v) {
                 String setName = mDeleteInput.getText().toString();
                 if (setName.equals(""))
-                    Toast.makeText(v.getContext(),"Please Enter a Set Name.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),"Please Enter a Set Name.",Toast.LENGTH_SHORT)
+                            .show();
+                else if (!setName.equals(ChooseSetFragment.getSetName()))
+                    Toast.makeText(v.getContext(),"Please Enter a Valid Set Name.",
+                            Toast.LENGTH_SHORT).show();
                 else {
                     db.deleteSet(setName);
+                    InputMethodManager imm = (InputMethodManager)getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
                     mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
                             new MainFragment(), FRAG_MAIN).addToBackStack(FRAG_MAIN).commit();
                 }

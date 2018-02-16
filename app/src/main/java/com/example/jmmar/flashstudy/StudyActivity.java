@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class StudyActivity extends AppCompatActivity {
     private DBHelper db;
@@ -21,9 +23,11 @@ public class StudyActivity extends AppCompatActivity {
     private boolean mShowsTerm;
 
     private Button mCardDisplay;
-    private Button mNextCard;
-    private Button mPrevCard;
+    private TextView mNextCard;
+    private TextView mPrevCard;
+    private TextView mShuffle;
     private TextView mSetNameDisplay;
+    private TextView mDisplayTermOrDef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,11 @@ public class StudyActivity extends AppCompatActivity {
         mSize = mCards.size();
 
         mCardDisplay = (Button) findViewById(R.id.button_flash_card);
-        mNextCard = (Button) findViewById(R.id.button_next);
-        mPrevCard = (Button) findViewById(R.id.button_previous);
+        // mNextCard = (TextView) findViewById(R.id.button_next);
+        // mPrevCard = (TextView) findViewById(R.id.button_previous);
+        mShuffle = (TextView) findViewById(R.id.text_shuffle);
         mSetNameDisplay = (TextView) findViewById(R.id.display_set_name);
+        mDisplayTermOrDef = (TextView) findViewById(R.id.text_term_def);
 
         // Display the first card
         mCurrCard = mCards.get(mCurrPos);
@@ -65,17 +71,60 @@ public class StudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!mShowsTerm){
                     mCardDisplay.setText(mCurrCard.getTerm());
+                    mDisplayTermOrDef.setText("Term");
                     mShowsTerm = true;
                 }
                 else{
                     mCardDisplay.setText(mCurrCard.getDef());
+                    mDisplayTermOrDef.setText("Definition");
                     mShowsTerm = false;
                 }
             }
         });
 
+        // Set onTouchListener to go to next or previous card by swiping
+        mCardDisplay.setOnTouchListener(new OnSwipeTouchListener(this.getApplicationContext()){
+            @Override
+            public void onFlip(){
+                if (!mShowsTerm){
+                    mCardDisplay.setText(mCurrCard.getTerm());
+                    mDisplayTermOrDef.setText("Term");
+                    mShowsTerm = true;
+                }
+                else{
+                    mCardDisplay.setText(mCurrCard.getDef());
+                    mDisplayTermOrDef.setText("Definition");
+                    mShowsTerm = false;
+                }
+            }
+            @Override
+            public void onSwipeRight() {
+                if (mCurrPos == mSize - 1)
+                    mCurrPos = 0;
+                else
+                    mCurrPos++;
+
+                mCurrCard = mCards.get(mCurrPos);
+                mCardDisplay.setText(mCurrCard.getDef());
+                mDisplayTermOrDef.setText("Definition");
+                mShowsTerm = false;
+            }
+            @Override
+            public void onSwipeLeft() {
+                if (mCurrPos == 0)
+                    mCurrPos = mSize - 1;
+                else
+                    mCurrPos--;
+
+                mCurrCard = mCards.get(mCurrPos);
+                mCardDisplay.setText(mCurrCard.getDef());
+                mDisplayTermOrDef.setText("Definition");
+                mShowsTerm = false;
+            }
+        });
+
         // Set onClickListener to move to the next card
-        mNextCard.setOnClickListener(new View.OnClickListener() {
+/*        mNextCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mCurrPos == mSize - 1)
@@ -85,6 +134,7 @@ public class StudyActivity extends AppCompatActivity {
 
                 mCurrCard = mCards.get(mCurrPos);
                 mCardDisplay.setText(mCurrCard.getDef());
+                mDisplayTermOrDef.setText("Definition");
                 mShowsTerm = false;
             }
         });
@@ -100,8 +150,37 @@ public class StudyActivity extends AppCompatActivity {
 
                 mCurrCard = mCards.get(mCurrPos);
                 mCardDisplay.setText(mCurrCard.getDef());
+                mDisplayTermOrDef.setText("Definition");
                 mShowsTerm = false;
             }
         });
+*/
+        mShuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shuffleCards();
+                mCurrPos = 0;
+                mCurrCard = mCards.get(mCurrPos);
+                mCardDisplay.setText(mCurrCard.getDef());
+                mDisplayTermOrDef.setText("Definition");
+                mShowsTerm = false;
+            }
+        });
+    }
+
+    private void shuffleCards(){
+        ArrayList<IndexCard> newList = new ArrayList<>(mSize);
+        int size = mSize,
+                origSize = mSize,
+                origPos;
+        Random gen = new Random();
+
+        for (origPos = 0;origPos<origSize;origPos++){
+            int num = gen.nextInt(size);
+            newList.add(mCards.get(num));
+            mCards.remove(num);
+            size--;
+        }
+        mCards = newList;
     }
 }

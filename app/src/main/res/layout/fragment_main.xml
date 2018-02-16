@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jmmar.flashstudy.MainFragment"
-    android:background="@color/colorLightBlue"
+    android:background="@color/colorLightGray"
     android:orientation="vertical">
 
     <TextView
@@ -32,6 +32,17 @@
         android:text="add set"
         android:layout_weight=".1"
         style="@style/default_button_theme" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".2"/>
+
+    <Button
+        android:id="@+id/button_settings"
+        android:text="settings"
+        style="@style/default_button_theme"
+        android:layout_weight=".1"/>
 
     <FrameLayout
         android:layout_width="wrap_content"

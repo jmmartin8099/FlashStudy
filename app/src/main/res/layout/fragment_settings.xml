@@ -3,16 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
-    android:orientation="vertical"
-    tools:context="com.example.jmmar.flashstudy.EditSetFragment">
+    tools:context="com.example.jmmar.flashstudy.SettingsFragment">
 
     <TextView
-        android:text="Choose a Card to Edit"
+        android:text="Settings"
         style="@style/title_theme" />
 
-    <ListView
-        android:id="@+id/list_view_cards"
-        style="@style/default_list_view" />
 
 
 

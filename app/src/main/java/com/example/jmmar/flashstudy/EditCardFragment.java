@@ -101,6 +101,8 @@ public class EditCardFragment extends Fragment {
                     newCard.setDef(newDef);
                     db.deleteCard(mSetName,sCard.getTerm());
                     db.addCard(mSetName,newCard);
+                    Toast.makeText(v.getContext(),"Card Successfully Changed.",Toast.LENGTH_SHORT)
+                            .show();
                 }
                 else if (!newTerm.equals("") && newDef.equals("")){
                     // Term has been changed, Definition has not been changed
@@ -109,6 +111,8 @@ public class EditCardFragment extends Fragment {
                     newCard.setDef(sCard.getDef());
                     db.deleteCard(mSetName,sCard.getTerm());
                     db.addCard(mSetName,newCard);
+                    Toast.makeText(v.getContext(),"Card Successfully Changed.",Toast.LENGTH_SHORT)
+                            .show();
                 }
                 else{
                     // Both term and definition has been changed
@@ -117,6 +121,8 @@ public class EditCardFragment extends Fragment {
                     newCard.setDef(newDef);
                     db.deleteCard(mSetName,sCard.getTerm());
                     db.addCard(mSetName,newCard);
+                    Toast.makeText(v.getContext(),"Card Successfully Changed.",Toast.LENGTH_SHORT)
+                            .show();
                 }
 
                 MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
