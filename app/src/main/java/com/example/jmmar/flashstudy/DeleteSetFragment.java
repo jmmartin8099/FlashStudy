@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.jmmar.flashstudy.R;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_DELETE_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
 
@@ -58,8 +59,8 @@ public class DeleteSetFragment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).addToBackStack(FRAG_MAIN).commit();
+                // hideKeyboard();
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_DELETE_SET);
             }
         });
 
@@ -76,16 +77,19 @@ public class DeleteSetFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                 else {
                     db.deleteSet(setName);
-                    InputMethodManager imm = (InputMethodManager)getActivity()
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
-                    mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                            new MainFragment(), FRAG_MAIN).addToBackStack(FRAG_MAIN).commit();
+                    hideKeyboard();
+                    MainActivity.launchFragment(new MainFragment(),FRAG_MAIN,null);
                 }
             }
         });
 
         return v;
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
 
     public void msg(String str){

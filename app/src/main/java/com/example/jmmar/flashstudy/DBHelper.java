@@ -53,6 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO: Fix onUpgrade
         db.execSQL(DELETE_SETS);
         onCreate(db);
     }
@@ -129,6 +130,12 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String tableName = makeValidTableName(setName);
         Cursor cursor = db.query(tableName,null,null,null,null,null,null);
+        return cursor.getCount();
+    }
+
+    public int numSets(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(SETS_TABLE_NAME,null,null,null,null,null,null);
         return cursor.getCount();
     }
 

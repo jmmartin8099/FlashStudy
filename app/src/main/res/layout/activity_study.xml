@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    android:background="@color/colorLightBlack"
     tools:context="com.example.jmmar.flashstudy.StudyActivity">
 
     <TextView
         android:id="@+id/text_shuffle"
         android:text="Shuffle"
         android:textSize="25dp"
-        android:textColor="@color/colorDarkBlue"
+        android:textColor="@color/colorLightRed"
         android:fontFamily="cursive"
         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
@@ -17,6 +17,7 @@
 
     <TextView
         android:id="@+id/display_set_name"
+        android:textColor="@color/colorWhite"
         style="@style/text_setname"
         android:text="Default Set Name" />
 
@@ -28,6 +29,7 @@
     <TextView
         android:id="@+id/text_term_def"
         android:text="Definition"
+        android:textColor="@color/colorLightBlue"
         style="@style/text_setname"
         android:layout_alignParentBottom="true"/>
 

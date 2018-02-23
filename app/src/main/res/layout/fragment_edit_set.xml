@@ -2,12 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    android:layout_margin="35dp"
+    android:background="@drawable/black_background"
     android:orientation="vertical"
     tools:context="com.example.jmmar.flashstudy.EditSetFragment">
 
     <TextView
         android:text="Choose a Card to Edit"
+        android:textColor="@color/colorWhite"
+        android:textSize="40dp"
         style="@style/title_theme" />
 
     <ListView

@@ -76,7 +76,7 @@ public class ChooseSetFragment extends Fragment {
         // TODO: Create a layout to adjust the text inside the ListView
         mSetsListView = (ListView) v.findViewById(R.id.list_view_setnames);
         mSetsListView.setAdapter(new ArrayAdapter<String>(this.getContext()
-                ,android.R.layout.simple_list_item_1,mSets));
+                ,R.layout.list_item,mSets));
 
         mSetsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override

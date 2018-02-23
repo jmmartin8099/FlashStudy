@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    android:layout_height="wrap_content"
+    android:layout_margin="25dp"
+    android:background="@drawable/black_background"
     android:orientation="vertical"
     tools:context="com.example.jmmar.flashstudy.EditCardFragment">
 
@@ -33,29 +34,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:gravity="center">
 
     <Button
         android:id="@+id/button_cancel_card_change"
         android:text="cancel"
         android:layout_width="wrap_content"
-        style="@style/default_button_theme_land"
-        android:layout_weight=".33"/>
+        style="@style/red_button_black"/>
 
     <Button
         android:id="@+id/button_save_card_change"
-        android:text="save changes"
+        android:text="save"
         android:layout_width="wrap_content"
-        style="@style/default_button_theme_land"
-        android:layout_weight=".33"/>
+        style="@style/green_button_black"/>
 
     <Button
         android:id="@+id/button_delete_card"
-        android:text="delete card"
+        android:text="delete"
         android:layout_width="wrap_content"
-        style="@style/default_button_theme_land"
-        android:layout_weight=".33"/>
+        style="@style/yellow_button_black"/>
 
     </LinearLayout>
-
 </LinearLayout>

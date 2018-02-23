@@ -1,18 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="25dp"
     tools:context="com.example.jmmar.flashstudy.AddCardsFragment"
-    android:background="@color/colorLightGray"
+    android:background="@drawable/black_background"
     android:orientation="vertical">
 
     <TextView
         style="@style/title_theme"
         android:text="Add Cards"
+        android:textColor="@color/colorLightBlue"
         android:gravity="center" />
 
     <TextView
         style="@style/default_text_theme"
+        android:textColor="@color/colorLightYellow"
         android:text="Enter Term:" />
 
     <EditText
@@ -22,6 +26,7 @@
 
     <TextView
         style="@style/default_text_theme"
+        android:textColor="@color/colorLightYellow"
         android:text="Enter Definition:" />
 
     <EditText
@@ -29,14 +34,21 @@
         android:id="@+id/edit_text_definition"
         android:hint="Definition" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
     <Button
         android:id="@+id/button_cancel_add_card"
         android:text="cancel"
-        style="@style/default_button_theme" />
+        style="@style/red_button_black" />
 
     <Button
-        style="@style/default_button_theme"
+        style="@style/green_button_black"
         android:id="@+id/button_enter_card"
         android:text="enter" />
+
+        </LinearLayout>
 
 </LinearLayout>

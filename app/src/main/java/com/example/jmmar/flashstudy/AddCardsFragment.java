@@ -1,12 +1,14 @@
 package com.example.jmmar.flashstudy;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -55,6 +57,7 @@ public class AddCardsFragment extends Fragment {
                     IndexCard card = new IndexCard(mTerm.getText().toString(),
                             mDefinition.getText().toString());
                     sDb.addCard(sSetname, card);
+                    hideKeyboard();
                     Toast.makeText(v.getContext(), "Card Successfully Added!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -64,13 +67,20 @@ public class AddCardsFragment extends Fragment {
         mCancelCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // hideKeyboard();
                 MainActivity.setCurrFragDisplayed(MainActivity.FRAG_SET_VIEW_ID);
-                MainActivity.launchFragment(new SetViewFragment(),MainActivity.FRAG_SET_VIEW,
-                        MainActivity.FRAG_ADD_CARDS);
+                MainActivity.launchFragment(new SetViewFragment(), MainActivity.FRAG_SET_VIEW
+                        , MainActivity.FRAG_CHOOSE_SET);
             }
         });
 
         return v;
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
 
     public void msg(String str){

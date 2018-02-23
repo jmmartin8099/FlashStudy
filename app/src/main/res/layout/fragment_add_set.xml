@@ -1,18 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/black_background"
     tools:context=".AddSetFragment">
 
     <TextView
-        android:text="Add New Set"
-        android:gravity="center"
-        style="@style/title_theme" />
-
-    <TextView
         android:text="Enter Set name:"
+        android:textColor="@color/colorLightBlue"
         style="@style/default_text_theme" />
 
     <EditText
@@ -20,14 +17,25 @@
         android:hint="Set Name"
         style="@style/default_edit_text_theme" />
 
-    <Button
-        android:id="@+id/button_cancel_set_name"
-        android:text="cancel"
-        style="@style/default_button_theme" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button_enter_set_name"
-        android:text="enter"
-        style="@style/default_button_theme" />
+        <Button
+            android:id="@+id/button_cancel_set_name"
+            android:text="CANCEL"
+            style="@style/red_button_black"
+            android:textSize="20dp"
+            android:layout_weight=".5"/>
+
+        <Button
+            android:id="@+id/button_enter_set_name"
+            android:text="ENTER"
+            android:textSize="20dp"
+            style="@style/green_button_black"
+            android:layout_weight=".5"/>
+
+    </LinearLayout>
 
 </LinearLayout>

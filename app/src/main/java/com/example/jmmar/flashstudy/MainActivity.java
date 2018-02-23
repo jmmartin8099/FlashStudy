@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int FRAG_DELETE_SET_ID = 6;
     public static final String FRAG_EDIT_CARD = "EditCardFragment";
     public static final int FRAG_EDIT_CARD_ID = 7;
+    public static final String FRAG_SETTINGS = "SettingsFragment";
+    public static final int FRAG_SETTINGS_ID = 8;
 
     private static int sCurrFragDisplayed;
 
@@ -52,21 +54,13 @@ public class MainActivity extends AppCompatActivity {
         sDb = new DBHelper(getApplicationContext());
         sFragmentManager = getSupportFragmentManager();
 
-        /*View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();*/
-
         if (sCurrFragDisplayed != 0){
             displayCurrFragment();
         }
         else {
             // Set current displayed fragment to MainFragment
             sCurrFragDisplayed = FRAG_MAIN_ID;
-            sFragmentManager.beginTransaction().add(R.id.big_fragment_container,
-                    new MainFragment(), FRAG_MAIN).commit();
+            launchFragment(new MainFragment(),FRAG_MAIN,null);
         }
     }
 
@@ -113,12 +107,15 @@ public class MainActivity extends AppCompatActivity {
                 launchFragment(new EditCardFragment(),FRAG_EDIT_CARD,FRAG_EDIT_SET);
                 break;
 
+            case FRAG_SETTINGS_ID:
+                launchFragment(new SettingsFragment(),FRAG_SETTINGS,FRAG_MAIN);
+                break;
         }
     }
 
-    public static void launchFragment(Fragment frag,String tag,String backStackTag){
-        sFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                frag,tag).addToBackStack(backStackTag).commit();
+    public static void launchFragment(Fragment frag,String tag,String backTag){
+        sFragmentManager.beginTransaction().add(R.id.big_fragment_container,
+                frag,tag).addToBackStack(backTag).commit();
     }
 
     public void hideKeyboard(){

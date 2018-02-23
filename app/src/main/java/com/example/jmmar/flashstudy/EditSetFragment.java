@@ -70,7 +70,7 @@ public class EditSetFragment extends Fragment {
 
         mCardsList = (ListView) v.findViewById(R.id.list_view_cards);
         mCardsList.setAdapter(new ArrayAdapter<String>(this.getContext()
-                ,android.R.layout.simple_list_item_1,mCardsData));
+                ,R.layout.list_item,mCardsData));
         mCardsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent,View view,int position,long id){

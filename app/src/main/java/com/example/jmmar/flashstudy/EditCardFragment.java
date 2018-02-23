@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_CARD;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_EDIT_SET;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_MAIN;
 import static com.example.jmmar.flashstudy.MainActivity.FRAG_SET_VIEW;
@@ -73,8 +74,7 @@ public class EditCardFragment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).addToBackStack(FRAG_MAIN).commit();
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_CARD);
             }
         });
 
@@ -92,7 +92,7 @@ public class EditCardFragment extends Fragment {
                     // No changes made to card, launch SetViewFragment
                     Toast.makeText(v.getContext(),"No Changes Made To Card.",Toast.LENGTH_SHORT)
                             .show();
-                    MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
+                    MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_CARD);
                 }
                 else if(newTerm.equals("") && !newDef.equals("")){
                     // Term has not been changed, Definition has changed
@@ -125,7 +125,7 @@ public class EditCardFragment extends Fragment {
                             .show();
                 }
 
-                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_CARD);
             }
         });
 
@@ -133,9 +133,7 @@ public class EditCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 db.deleteCard(mSetName,sCard.getTerm());
-
-                mFragmentManager.beginTransaction().replace(R.id.big_fragment_container,
-                        new SetViewFragment(),FRAG_SET_VIEW).commit();
+                MainActivity.launchFragment(new SetViewFragment(),FRAG_SET_VIEW,FRAG_EDIT_SET);
             }
         });
 

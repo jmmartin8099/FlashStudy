@@ -73,8 +73,7 @@ public class SetViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity.setCurrFragDisplayed(FRAG_CHOOSE_SET_ID);
-                MainActivity.launchFragment(new ChooseSetFragment(),FRAG_CHOOSE_SET,
-                        FRAG_SET_VIEW);
+                MainActivity.launchFragment(new ChooseSetFragment(),FRAG_CHOOSE_SET,FRAG_MAIN);
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.jmmar.flashstudy;
 
 
+import android.content.Context;
 import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jmmar.flashstudy.R;
@@ -45,9 +48,13 @@ public class AddSetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mSetNameInput.getText().toString().equals(""))
-                    Toast.makeText(v.getContext(), "Please Enter a Set Name.", Toast.LENGTH_SHORT).show();
-                else if (db.addSet(mSetNameInput.getText().toString()))
-                    Toast.makeText(v.getContext(),"Set Successfully Added!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Please Enter a Set Name.", Toast.LENGTH_SHORT).
+                            show();
+                else if (db.addSet(mSetNameInput.getText().toString())) {
+                    Toast.makeText(v.getContext(), "Set Successfully Added!", Toast.LENGTH_SHORT).
+                            show();
+                    hideKeyboard();
+                }
                 else
                     Toast.makeText(v.getContext(),"Set Already Exists!",Toast.LENGTH_SHORT).show();
             }
@@ -56,13 +63,20 @@ public class AddSetFragment extends Fragment {
         mCancelSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // hideKeyboard();
                 MainActivity.setCurrFragDisplayed(MainActivity.FRAG_MAIN_ID);
-                MainActivity.launchFragment(new MainFragment(),MainActivity.FRAG_MAIN,
-                        MainActivity.FRAG_ADD_SET);
+                MainActivity.launchFragment(new MainFragment(),MainActivity.FRAG_MAIN,null);
             }
         });
 
         return v;
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive())
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
 
     public void msg(String str){

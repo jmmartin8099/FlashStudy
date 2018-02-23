@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
+    android:background="@drawable/white_background"
     android:orientation="vertical"
     tools:context="com.example.jmmar.flashstudy.SetViewFragment">
 
     <TextView
         android:id="@+id/view_set_title"
         android:text="Set Name"
+        android:textColor="@color/colorBlack"
         style="@style/title_theme" />
 
     <FrameLayout
@@ -18,8 +19,7 @@
 
     <Button
         android:id="@+id/button_begin_studying"
-        style="@style/default_button_theme"
-        android:background="@color/colorWhite"
+        style="@style/red_button_white"
         android:text="Begin Studying"
         android:onClick="beginStudying"
         android:layout_weight=".1"/>
@@ -30,7 +30,7 @@
         android:layout_weight=".2"/>
 
     <Button
-        style="@style/default_button_theme"
+        style="@style/blue_button_white"
         android:text="add cards"
         android:id="@+id/button_add_cards"
         android:onClick="openAddCardsFrag"
@@ -44,7 +44,7 @@
     <Button
         android:id="@+id/button_edit_set"
         android:text="edit set"
-        style="@style/default_button_theme"
+        style="@style/green_button_white"
         android:onClick="openEditSetFrag"
         android:layout_weight=".1"/>
 
@@ -56,14 +56,12 @@
     <Button
         android:id="@+id/button_delete_set"
         android:text="delete set"
-        style="@style/default_button_theme"
+        style="@style/yellow_button_white"
         android:layout_weight=".1"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight=".2"/>
-
-
 
 </LinearLayout>
