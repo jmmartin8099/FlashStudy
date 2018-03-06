@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/white_background"
     android:orientation="vertical"
-    tools:context="com.example.jmmar.flashstudy.SetViewFragment">
+    tools:context="com.CCC.jmmartin.flashstudy.SetViewFragment">
 
     <TextView
         android:id="@+id/view_set_title"

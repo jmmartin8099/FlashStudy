@@ -5,7 +5,7 @@
     android:layout_margin="35dp"
     android:background="@drawable/black_background"
     android:orientation="vertical"
-    tools:context="com.example.jmmar.flashstudy.EditSetFragment">
+    tools:context="com.CCC.jmmartin.flashstudy.EditSetFragment">
 
     <TextView
         android:text="Choose a Card to Edit"

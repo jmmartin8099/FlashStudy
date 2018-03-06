@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="25dp"
-    tools:context="com.example.jmmar.flashstudy.AddCardsFragment"
+    tools:context="com.CCC.jmmartin.flashstudy.AddCardsFragment"
     android:background="@drawable/black_background"
     android:orientation="vertical">
 

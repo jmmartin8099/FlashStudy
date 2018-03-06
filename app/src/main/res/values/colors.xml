@@ -5,6 +5,8 @@
     <color name="colorDarkBlue">#000eae</color>
     <color name="colorLightGray">#939396</color>
     <color name="colorGray">#666666</color>
+    <color name="colorDarkGray">#414040</color>
+    <color name="gray_overlay">#DF414040</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorLightBlack">#1a1a1a</color>
@@ -16,5 +18,5 @@
     <color name="colorDarkGreen">#1e700b</color>
     <color name="colorLightYellow">#f4e94e</color>
     <color name="colorYellow">#cec704</color>
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">#3F000000</color>
 </resources>

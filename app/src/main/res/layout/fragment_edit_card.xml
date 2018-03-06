@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:background="@drawable/black_background"
     android:orientation="vertical"
-    tools:context="com.example.jmmar.flashstudy.EditCardFragment">
+    tools:context="com.CCC.jmmartin.flashstudy.EditCardFragment">
 
     <TextView
         android:id="@+id/text_display_old_term"

@@ -3,34 +3,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlack"
-    tools:context="com.example.jmmar.flashstudy.StudyActivity">
+    tools:context="com.CCC.jmmartin.flashstudy.StudyActivity">
 
     <TextView
         android:id="@+id/text_shuffle"
+        style="@style/text_study"
         android:text="Shuffle"
         android:textSize="25dp"
-        android:textColor="@color/colorLightRed"
-        android:fontFamily="cursive"
-        android:layout_marginLeft="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/colorLightRed" />
 
     <TextView
         android:id="@+id/display_set_name"
         android:textColor="@color/colorWhite"
-        style="@style/text_setname"
+        android:gravity="center"
+        style="@style/text_study"
         android:text="Default Set Name" />
+
+    <Button
+        android:id="@+id/button_help"
+        android:text="\?"
+        style="@style/help"/>
 
     <Button
         android:id="@+id/button_flash_card"
         android:text="default text"
+        android:elevation="5dp"
         style="@style/button_index_card" />
 
     <TextView
         android:id="@+id/text_term_def"
         android:text="Definition"
         android:textColor="@color/colorLightBlue"
-        style="@style/text_setname"
+        android:gravity="center"
+        style="@style/text_study"
         android:layout_alignParentBottom="true"/>
+
+    <FrameLayout
+        android:id="@+id/layout_help"
+        android:visibility="invisible"
+        android:elevation="10dp"
+        android:background="@color/gray_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Swipe Up or Down to Flip Card"
+            android:textColor="@color/colorBlack"
+            android:gravity="center"
+            android:layout_margin="45dp"
+            style="@style/text_study" />
+
+        <TextView
+            style="@style/text_study"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:translationX="55dp"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:text="Swipe Left for\nPrevious Card"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            style="@style/text_study"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:translationX="-55dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="Swipe Right for\nNext Card"
+            android:textColor="@color/colorBlack" />
+
+        <Button
+            android:id="@+id/button_close_help"
+            android:text="got it!"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
 </RelativeLayout>

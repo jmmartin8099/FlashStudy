@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="40dp"
-    tools:context="com.example.jmmar.flashstudy.AddCardsFragment"
+    tools:context="com.CCC.jmmar.flashstudy.AddCardsFragment"
     android:background="@drawable/black_background"
     android:orientation="vertical">
 

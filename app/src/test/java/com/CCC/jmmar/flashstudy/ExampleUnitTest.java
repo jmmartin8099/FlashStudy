@@ -1,4 +1,4 @@
-package com.example.jmmar.flashstudy;
+package com.CCC.jmmar.flashstudy;
 
 import org.junit.Test;
 
