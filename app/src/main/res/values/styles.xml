@@ -1,240 +1,127 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorLightGray</item>
-        <item name="colorPrimaryDark">@color/colorGray</item>
-        <item name="colorAccent">@color/colorLightGray</item>
-    </style>
-
-    <style name="black_button_theme">
-        <item name="android:background">@drawable/button_white_frame</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_margin">10dp</item>
+    <style name="display_app_name">
+        <item name="android:text">@string/app_name</item>
         <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">italic</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="red_button_white">
-        <item name="android:background">@drawable/red_button_white</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorDarkRed</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="green_button_white">
-        <item name="android:background">@drawable/green_button_white</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorDarkGreen</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="blue_button_white">
-        <item name="android:background">@drawable/blue_button_white</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorDarkBlue</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="yellow_button_white">
-        <item name="android:background">@drawable/yellow_button_white</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorYellow</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="red_button_black">
-        <item name="android:background">@drawable/red_button_black</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorLightRed</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="green_button_black">
-        <item name="android:background">@drawable/green_button_black</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorLightGreen</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="blue_button_black">
-        <item name="android:background">@drawable/blue_button_black</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorLightBlue</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="yellow_button_black">
-        <item name="android:background">@drawable/yellow_button_black</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textColor">@color/colorLightYellow</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="default_button_theme_land">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textColor">@color/colorDarkBlue</item>
-        <item name="android:textStyle">italic</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="android:background">@color/colorWhite</item>
-    </style>
-
-    <style name="title_theme">
-        <item name="android:textSize">50dp</item>
-        <item name="android:textColor">@drawable/color_rgb</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">cursive</item>
-    </style>
-
-    <style name="text_study">
-        <item name="android:textSize">25dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">cursive</item>
-    </style>
-
-    <style name="text_small_fragment">
-        <item name="android:textSize">25dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_margin">5dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:textColor">@color/colorDarkBlue</item>
-    </style>
-
-    <style name="default_text_theme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">25dp</item>
-        <item name="android:textColor">@color/colorDarkBlue</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="android:layout_margin">10dp</item>
-    </style>
-
-    <style name="default_text_theme_land">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">25dp</item>
-        <item name="android:textColor">@color/colorDarkBlue</item>
-        <item name="android:fontFamily">serif</item>
-        <item name="android:layout_margin">5dp</item>
-    </style>
-
-    <style name="default_edit_text_theme">
-        <item name="android:textSize">20dp</item>
-        <item name="android:textColor">@color/colorLightYellow</item>
-        <item name="android:textColorHint">@color/colorLightGray</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="default_list_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:divider">@color/colorWhite</item>
-        <item name="android:dividerHeight">5dp</item>
-    </style>
-
-    <style name="button_index_card">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginTop">40dp</item>
-        <item name="android:layout_marginBottom">40dp</item>
-        <item name="android:layout_marginRight">55dp</item>
-        <item name="android:layout_marginLeft">55dp</item>
-        <item name="android:background">@color/colorWhite</item>
-        <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">cursive</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
     </style>
 
-    <style name="help">
+    <style name="options_text">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:background">@color/colorLightCyan</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="title_set_name">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/colorDarkCyan</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="display_num_cards">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/colorDarkCyan</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="title_study">
+        <item name="android:text">BEGIN STUDYING</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="title_open_view">
         <item name="android:textSize">25dp</item>
-        <item name="android:textAlignment">viewEnd</item>
-        <item name="android:textColor">@color/colorLightYellow</item>
-        <item name="android:background">#00FFFFFF</item>
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginTop">35dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="add_card_edit_text">
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="card_edit_text">
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="add_card_button">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/colorDarkCyan</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">.5</item>
+    </style>
+
+    <style name="edit_card_button">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/colorDarkCyan</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">.5</item>
+    </style>
+
+    <style name="grid_cards">
+        <item name="android:numColumns">2</item>
+        <item name="android:horizontalSpacing">10dp</item>
+        <item name="android:verticalSpacing">10dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:labelTextSize">0dp</item>
+        <item name="colorPrimary">@color/colorCyan</item>
+        <item name="colorPrimaryDark">@color/colorDarkCyan</item>
+        <item name="colorAccent">@color/colorLightGray</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">

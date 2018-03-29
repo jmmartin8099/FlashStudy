@@ -18,5 +18,8 @@
     <color name="colorDarkGreen">#1e700b</color>
     <color name="colorLightYellow">#f4e94e</color>
     <color name="colorYellow">#cec704</color>
+    <color name="colorCyan">#00ffea</color>
+    <color name="colorDarkCyan">#00afa4</color>
+    <color name="colorLightCyan">#92d7d1</color>
     <color name="black_overlay">#3F000000</color>
 </resources>

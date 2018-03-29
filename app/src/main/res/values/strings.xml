@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="previous_text">P\nR\nE\nV\nI\nO\nU\nS</string>
     <string name="next_text">N\nE\nX\nT</string>
-
+    <string name="delete_set_msg">This will erase all data in this set and cannot be undone. Enter the name of a set to delete it.</string>
     <string name="title_activity_study">StudyActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

@@ -5,15 +5,280 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.CCC.jmmartin.flashstudy.MainActivity"
-    android:id="@+id/rootView"
-    android:background="@drawable/background_color_red">
+    android:id="@+id/rootView">
 
-    <FrameLayout
-        android:id="@+id/big_fragment_container"
+        <!-- ToolBar Start -->
+        <FrameLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:background="@color/colorCyan"
+            android:layout_height="55dp">
+
+            <ImageButton
+                android:background="@mipmap/ic_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                style="@style/display_app_name" />
+
+            <ImageButton
+                android:id="@+id/options_button"
+                android:background="@mipmap/ic_options"
+                android:onClick="openOptions"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+        <!-- ToolBar End -->
+
+    <!-- Options Menu Start -->
+    <LinearLayout
+        android:id="@+id/options_view"
+        android:visibility="gone"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:layout_gravity="right"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="15dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_create_set"
+            android:text="Create Set"
+            style="@style/options_text" />
+
+        <TextView
+            android:id="@+id/text_delete_set"
+            android:text="Delete Set"
+            style="@style/options_text" />
+
+        <TextView
+            android:id="@+id/text_help"
+            android:text="Help"
+            style="@style/options_text" />
+
+        <TextView
+            android:id="@+id/text_settings"
+            android:text="Settings"
+            style="@style/options_text" />
+
+    </LinearLayout>
+    <!-- Options Menu End -->
+
+    <!-- Main Screen Start -->
+    <LinearLayout
+        android:background="@drawable/background_cyan"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent" >
 
+        <TextView
+            android:id="@+id/text_set_name"
+            android:text="Default Set Name"
+            style="@style/title_set_name"/>
 
+        <TextView
+            android:id="@+id/text_num_cards"
+            android:text="### Cards"
+            style="@style/display_num_cards" />
 
+        <TextView
+            android:id="@+id/begin_studying"
+            style="@style/title_study" />
+
+        <TextView
+            android:id="@+id/open_add_cards"
+            android:text="Add Cards"
+            style="@style/title_open_view" />
+
+        <!-- Add Card View Start -->
+        <LinearLayout
+            android:id="@+id/view_add_cards"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_term"
+                android:hint="Enter a Term"
+                style="@style/add_card_edit_text" />
+
+            <EditText
+                android:id="@+id/input_definition"
+                android:hint="Enter a Definition"
+                style="@style/add_card_edit_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/clear_add_card"
+                    android:text="CLEAR"
+                    style="@style/add_card_button" />
+
+                <Button
+                    android:id="@+id/enter_add_card"
+                    android:text="ENTER"
+                    style="@style/add_card_button" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!-- Add Cards View End -->
+
+        <TextView
+            android:id="@+id/edit_cards"
+            android:text="Edit Cards"
+            style="@style/title_open_view" />
+
+        <!-- Edit Cards View Start -->
+        <LinearLayout
+            android:id="@+id/edit_card_view"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/edit_term_input"
+                android:hint="Current Term"
+                style="@style/card_edit_text" />
+
+            <EditText
+                android:id="@+id/edit_definition_input"
+                android:hint="Current Definition"
+                style="@style/card_edit_text" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/delete_edit_card"
+                        android:text="DELETE"
+                        style="@style/edit_card_button" />
+
+                    <Button
+                        android:id="@+id/update_edit_card"
+                        android:text="UPDATE"
+                        style="@style/edit_card_button" />
+
+                </LinearLayout>
+
+            <GridView
+                android:id="@+id/grid_view_cards"
+                style="@style/grid_cards" />
+
+        </LinearLayout>
+        <!-- Edit Cards View End -->
+
+    </LinearLayout>
+    <!-- Main Screen End -->
+
+    <!-- List of Sets Start -->
+    <FrameLayout
+        android:id="@+id/set_view"
+        android:visibility="gone"
+        android:elevation="20dp"
+        android:background="@drawable/background_choose_set"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="275dp" >
+
+        <ListView
+            android:id="@+id/list_sets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+    <!-- List of Sets End -->
+
+    <!-- Create Set Start -->
+    <LinearLayout
+        android:id="@+id/view_add_set"
+        android:background="@drawable/background_choose_set"
+        android:visibility="gone"
+        android:elevation="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input_set_name"
+            android:hint="Enter a Set Name"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cancel_add_set"
+                style="@style/add_card_button"
+                android:text="CANCEL" />
+
+            <Button
+                android:id="@+id/enter_add_set"
+                style="@style/add_card_button"
+                android:text="ENTER" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Create Set End -->
+
+    <!-- Delete Set Start -->
+    <LinearLayout
+        android:id="@+id/delete_set_view"
+        android:background="@drawable/background_choose_set"
+        android:visibility="gone"
+        android:elevation="20dp"
+        android:layout_margin="80dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/delete_set_msg"
+            android:textSize="20dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/delete_set_input"
+            android:hint="Enter an Existing Set Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cancel_delete_set"
+                style="@style/add_card_button"
+                android:text="CANCEL" />
+
+            <Button
+                android:id="@+id/delete_set_button"
+                style="@style/add_card_button"
+                android:text="DELETE" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Delete Set End -->
 
 </FrameLayout>
