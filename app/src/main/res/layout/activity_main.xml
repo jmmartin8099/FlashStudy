@@ -83,7 +83,7 @@
 
         <TextView
             android:id="@+id/text_num_cards"
-            android:text="### Cards"
+            android:text="0 Cards"
             style="@style/display_num_cards" />
 
         <TextView
@@ -280,5 +280,54 @@
 
     </LinearLayout>
     <!-- Delete Set End -->
+
+    <!-- Delete Card Prompt Start -->
+    <LinearLayout
+        android:id="@+id/delete_card_prompt"
+        android:background="@drawable/background_cyan"
+        android:visibility="gone"
+        android:padding="5dp"
+        android:elevation="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Are you sure you want to delete\nthis card? This process cannot be\nundone."
+            android:textColor="@color/colorBlack"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_delete_no"
+                android:text="NO"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5" />
+
+            <Button
+                android:id="@+id/button_delete_yes"
+                android:text="YES"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Delete Card Prompt End -->
 
 </FrameLayout>

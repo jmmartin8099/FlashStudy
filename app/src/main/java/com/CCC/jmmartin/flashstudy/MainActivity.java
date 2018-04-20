@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
     private GridView mGrid;
     private IndexCard mCurrCard;
     private int mCurrCardPos;
+    private LinearLayout mDeleteCardPrompt;
+    private Button mDeleteCardNo;
+    private Button mDeleteCardYes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,9 +151,13 @@ public class MainActivity extends AppCompatActivity {
         mCancelSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCreateSetView.setVisibility(View.GONE);
-                mSetNameInput.setText("");
-                mDisplaySet.setClickable(true);
+                if (mNumSets != 0) {
+                    mCreateSetView.setVisibility(View.GONE);
+                    mSetNameInput.setText("");
+                    mDisplaySet.setClickable(true);
+                }
+                else
+                    createToast("You Must Add a Set to Continue.");
             }
         });
 
@@ -159,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = mSetNameInput.getText().toString();
+                boolean mSetExists = false;
+
                 if (mNumSets == 0) {
                     mSetNames = new String[1];
                     mSets = new ArrayList<>(1);
@@ -167,15 +176,24 @@ public class MainActivity extends AppCompatActivity {
                     createToast("Please Enter a Set Name.");
                 else if (!input.equals("")){
                     for (int i = 0;i<mSetNames.length;i++)
-                        if (input.equals(mSetNames[i]))
+                        if (input.equals(mSetNames[i])) {
                             createToast("Set Already Exists.");
-                    sDb.addSet(input);
-                    mSets.add(input);
-                    castListToArray();
-                    mNumSets++;
-                    mList.setAdapter(new ArrayAdapter<String>(getApplicationContext()
-                            ,R.layout.list_item,mSetNames));
-                    hideKeyboard();
+                            mSetExists = true;
+                        }
+                    if (!mSetExists) {
+                        sDb.addSet(input);
+                        mSets.add(input);
+                        castListToArray();
+                        mNumSets++;
+                        mList.setAdapter(new ArrayAdapter<String>(getApplicationContext()
+                                , R.layout.list_item, mSetNames));
+                        hideKeyboard();
+                        createToast("Set Successfully Added.");
+                        mCurrSetName = input;
+                        mDisplaySet.setText(input);
+                        mNumCards.setText("0 Cards");
+                        mCreateSetView.setVisibility(View.GONE);
+                    }
                 }
                 mDisplaySet.setClickable(true);
             }
@@ -215,10 +233,15 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     for (int i = 0;i<mNumSets;i++)
                         if (input.equals(mSetNames[i])) {
+                            i = mNumSets;
                             sDb.deleteSet(input);
+                            mNumSets--;
                             notFound = false;
                             createToast("Set Successfully Deleted.");
                             getSetNames();
+                            mDeleteSetView.setVisibility(View.GONE);
+                            if (mNumSets == 0)
+                                mCreateSetView.setVisibility(View.VISIBLE);
                         }
                     if (notFound)
                         createToast("\"" + input + "\" Does Not Exist.");
@@ -243,9 +266,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // Create list of sets and set onClickListener
         getSetNames();
+        if (mNumSets == 0){
+            mCreateSetView.setVisibility(View.VISIBLE);
+            createToast("Please Add a Set to Begin Studying.");
+        }
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -283,12 +309,16 @@ public class MainActivity extends AppCompatActivity {
         mAddCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mAddCardView.getVisibility() == View.VISIBLE)
-                    mAddCardView.setVisibility(View.GONE);
-                else {
-                    mAddCardView.setVisibility(View.VISIBLE);
-                    mEditView.setVisibility(View.GONE);
+                if (mNumSets != 0) {
+                    if (mAddCardView.getVisibility() == View.VISIBLE)
+                        mAddCardView.setVisibility(View.GONE);
+                    else {
+                        mAddCardView.setVisibility(View.VISIBLE);
+                        mEditView.setVisibility(View.GONE);
+                    }
                 }
+                else
+                    createToast("No Current Set to Add Cards.");
             }
         });
 
@@ -310,6 +340,8 @@ public class MainActivity extends AppCompatActivity {
                     IndexCard temp = new IndexCard(newTerm,newDef);
                     if(sDb.addCard(mCurrSetName,temp)) {
                         createToast("Card Added Successfully!");
+                        mCurrSetNumCards++;
+                        mNumCards.setText(mCurrSetNumCards + " Cards");
                         getCards();
                         updateGridView();
                         hideKeyboard();
@@ -331,17 +363,30 @@ public class MainActivity extends AppCompatActivity {
         mDeleteCard = (Button) findViewById(R.id.delete_edit_card);
         mUpdateCard = (Button) findViewById(R.id.update_edit_card);
         mGrid = (GridView) findViewById(R.id.grid_view_cards);
+        mDeleteCardPrompt = (LinearLayout) findViewById(R.id.delete_card_prompt);
+        mDeleteCardNo = (Button) findViewById(R.id.button_delete_no);
+        mDeleteCardYes = (Button) findViewById(R.id.button_delete_yes);
 
         // Set onClickListener to open Edit Cards
         mEditCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEditView.getVisibility() == View.VISIBLE)
-                    mEditView.setVisibility(View.GONE);
-                else {
-                    mEditView.setVisibility(View.VISIBLE);
-                    mAddCardView.setVisibility(View.GONE);
+                if (mNumSets != 0) {
+                    if (sDb.numCardsInSet(mCurrSetName) != 0) {
+                        if (mEditView.getVisibility() == View.VISIBLE)
+                            mEditView.setVisibility(View.GONE);
+                        else {
+                            mEditView.setVisibility(View.VISIBLE);
+                            getCards();
+                            updateGridView();
+                            mAddCardView.setVisibility(View.GONE);
+                        }
+                    }
+                    else
+                        createToast("No Cards Available to Edit.");
                 }
+                else
+                    createToast("No Current Set to Edit.");
             }
         });
 
@@ -358,7 +403,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -372,10 +416,25 @@ public class MainActivity extends AppCompatActivity {
         mDeleteCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDeleteCardPrompt.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mDeleteCardYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 sDb.deleteCard(mCurrSetName,mCards.get(mCurrCardPos).getTerm());
                 getCards();
                 updateGridView();
+                mDeleteCardPrompt.setVisibility(View.GONE);
                 createToast("Card Successfully Deleted.");
+            }
+        });
+
+        mDeleteCardNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDeleteCardPrompt.setVisibility(View.GONE);
             }
         });
 

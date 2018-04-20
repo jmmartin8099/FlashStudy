@@ -5,14 +5,39 @@
     android:background="@drawable/background_study"
     tools:context="com.CCC.jmmartin.flashstudy.StudyActivity">
 
-    <TextView
-        android:id="@+id/text_shuffle"
-        android:text="Shuffle"
-        android:textSize="25dp"
-        android:textColor="@color/colorBlack"
-        android:fontFamily="monospace"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/text_shuffle"
+            android:background="@mipmap/ic_shuffle"
+            android:textSize="25dp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="monospace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/button_switch"
+            android:background="@mipmap/ic_change_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/button_edit"
+            android:background="@mipmap/ic_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/button_home"
+        android:background="@mipmap/ic_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
     <TextView
         android:id="@+id/display_set_name"
@@ -20,6 +45,7 @@
         android:gravity="center"
         android:text="Default Set Name"
         android:textSize="25dp"
+        android:fontFamily="monospace"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
@@ -36,8 +62,8 @@
         android:id="@+id/button_flash_card"
         android:text="default text"
         android:background="@color/colorWhite"
-        android:elevation="5dp"
-        android:layout_margin="50dp"
+        android:elevation="15dp"
+        android:layout_margin="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -46,50 +72,126 @@
         android:text="Definition"
         android:textSize="25dp"
         android:textColor="@color/colorBlack"
+        android:fontFamily="monospace"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <LinearLayout
+        android:id="@+id/study_edit_card"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:elevation="20dp"
+        android:layout_margin="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <EditText
+            android:id="@+id/study_edit_term"
+            android:hint="Current Term"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/study_edit_def"
+            android:hint="Current Definition"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/study_edit_cancel"
+                android:text="CANCEL"
+                android:textSize="25dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5" />
+
+            <Button
+                android:id="@+id/study_edit_update"
+                android:text="UPDATE"
+                android:textSize="25dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/layout_help"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:elevation="10dp"
         android:background="@color/gray_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:text="Swipe Up or Down to Flip Card"
-            android:textColor="@color/colorBlack"
-            android:gravity="center"
-            android:layout_margin="45dp"
-            android:layout_width="match_parent"
+            android:text="Click to Shuffle Cards"
+            android:textColor="@color/colorCyan"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:text="Click to Change Order\nof Term and Definition"
+            android:textColor="@color/colorCyan"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="55dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:translationX="55dp"
-            android:layout_gravity="left"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Click to Edit Current Card"
+            android:textColor="@color/colorCyan"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="110dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Swipe Up or Down to Flip Card"
+            android:textColor="@color/colorCyan"
             android:gravity="center"
-            android:text="Swipe Left for\nPrevious Card"
-            android:textColor="@color/colorBlack" />
+            android:layout_marginBottom="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:translationX="-55dp"
+            android:translationX="65dp"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:text="Swipe Left for\nPrevious Card"
+            android:textColor="@color/colorCyan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:translationX="-65dp"
             android:layout_gravity="right"
             android:gravity="center"
             android:text="Swipe Right for\nNext Card"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorCyan" />
 
         <Button
             android:id="@+id/button_close_help"
             android:text="got it!"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="140dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
